@@ -10,7 +10,24 @@ import com.example.giphytesttask.databinding.GifItemBinding
 import com.example.giphytesttask.models.DataObject
 
 class GifAdapter : RecyclerView.Adapter<GifAdapter.ViewHolder>() {
-    inner class ViewHolder(private val binding: GifItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    private lateinit var clickListener: OnItemClickListener
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnClickListener(listener: OnItemClickListener) {
+        clickListener = listener
+    }
+
+    inner class ViewHolder(listener: OnItemClickListener, private val binding: GifItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
         fun setData(item: DataObject) {
             binding.apply {
                 Glide.with(itemView)
@@ -22,6 +39,7 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
+            clickListener,
             GifItemBinding.inflate(
                 LayoutInflater.from(
                     parent.context

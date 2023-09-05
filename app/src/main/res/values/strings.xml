@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GiphyTestTask</string>
+    <string name="list_of_gifs">List of gifs</string>
 </resources>

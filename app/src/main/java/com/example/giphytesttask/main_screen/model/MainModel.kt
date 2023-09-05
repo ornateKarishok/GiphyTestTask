@@ -1,4 +1,4 @@
-package com.example.giphytesttask.model
+package com.example.giphytesttask.main_screen.model
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import retrofit2.Response
 class MainModel {
     var gifLiveData = MutableLiveData<DataResult>()
 
-    fun getGifs() : MutableLiveData<DataResult>{
+    fun getGifs(): MutableLiveData<DataResult> {
         RetrofitInstance.api.getGifs().enqueue(object : Callback<DataResult> {
             override fun onResponse(
                 call: Call<DataResult>,
